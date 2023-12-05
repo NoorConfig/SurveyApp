@@ -70,7 +70,7 @@ if uploaded_file:
         df['Other Options'] = df['Other Options'].str.lower().str.strip()
         
         main_answers = df['Main Options'].str.split(', ', expand=True).stack().str.lower().str.strip().value_counts()
-        other_answers = df['Other Options'].dropna().str.split(', ', expand=True).stack().str.lower().str.strip().value_counts()
+        other_answers = df['Other Options'].fillna('').astype(str).dropna().str.split(', ', expand=True).stack().str.lower().str.strip().value_counts()
         
         # First Histogram (Main Options)
         plt.figure(figsize=(10, 6))
